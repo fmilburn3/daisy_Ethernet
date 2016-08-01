@@ -1,26 +1,33 @@
 // -+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8
-void getMAC(char aString[], byte mac[], int n){
-  stringToBytes(aString, mac, n);
-  mac[0] = 0x00;                       // ???????????????????????????????? why is this needed?
+void getMAC(char aString[], byte mac[]){
+/*
+ * Generates a MAC for use with Ethernet from a string
+ */
+  int n = 6;
+  stringToBytes(aString, mac, n); 
+  mac[0] = 0x00;
+  if (DEBUG > 0) {
+    Serial.println("generated MAC");
+  }  
   if (DEBUG > 1) {
     int i;
     Serial.print ("byte mac[");
     Serial.print (n);
-    Serial.print("] = ");              // not working - bug in stringToBytes ????????????????????
+    Serial.print("] = ");              
     for (i = 0; i < n; i++) {
       Serial.print(mac[i],HEX);
       Serial.print(" ");
     }
+    Serial.println("");
   }  
 }
 // -+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8
 int stringToBytes(char aString[], byte someBytes[], int n) {
 /*
- * Take a C string with n*2 characters representing HEX values
- * and store them in a byte array of length n. HEX values A-F
- * may be upper or lower case.  Example: "A1b913512900" and n=6 
- * gives a byte array with these elements: {A1, B9, 13, 51, 29, 0}
- * Strings with improper HEX values return error code 1; else 0
+ * Takes a C string with n*2 characters representing HEX values and store them
+ * in a byte array of length n. HEX values A-F may be upper or lower case.  
+ * Example: "A1b913512900" and n=6 gives a byte array with these elements:
+ * {A1, B9, 13, 51, 29, 0}.  Strings with improper values return error code 1.
 */
   int error = 0;
   int val[n*2];
