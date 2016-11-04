@@ -10,13 +10,13 @@
 #define CHECK       60000            // time (ms) before connection check
 
 // marifact query strings
-const char versionNo[]  = "dAISy Ethernet 1_1";
+const char versionNo[]  = "dAISy Ethernet 1_3";
 const char clientStr0[] = "api.marifact.net";
 const char clientStr1[] = "GET /ais_sources/initialize/";
 const char clientStr2[] = " HTTP/1.1";
 const char clientStr3[] = "Host: api.marifact.net";
 const char clientStr4[] = "200 OK";
-const char clientStr5[] = "api.marifact.net/ais_sorces/";
+const char clientStr5[] = "api.marifact.net/ais_sources/";
 
 char nmea[MAXLEN];                   // general purpose buffer / char storage
                                      // used mainly for AIS nmea sentences
