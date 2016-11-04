@@ -4,7 +4,10 @@ void getMAC(char aString[], byte mac[]){
  * Generates a MAC for use with Ethernet from a string
  */
   int n = 6;
-  stringToBytes(aString, mac, n); 
+  // The dAISy identification string (aString[]) has 16 elements.  The 3rd
+  // element is being passed to stringToBytes in order to assure unique MAC
+  // addresses since the first elements are the same for a batch.
+  stringToBytes((aString+2), mac, n); 
   mac[0] = 0x00;
   if (DEBUG > 0) {
     Serial.println("generated MAC...");
@@ -49,3 +52,4 @@ int stringToBytes(char aString[], byte someBytes[], int n) {
   }
   return error;
 }
+
